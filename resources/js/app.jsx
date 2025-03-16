@@ -60,7 +60,7 @@ function App() {
 const root = document.getElementById("app");
 if (root) {
     ReactDOM.createRoot(root).render(
-        <Router basename="/backend-app">
+        <Router basename="/">
             <App />
         </Router>
     );
