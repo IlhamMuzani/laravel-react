@@ -1,0 +1,379 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.dashboard {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Tambahkan styling untuk menu aktif */
+.sidebar ul li.active {
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.sidebar ul li.active a {
+    color: #333 !important;
+    font-weight: bold;
+}
+
+
+/* Sidebar */
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #222d32;
+    color: white;
+    padding: 20px;
+    transition: width 0.3s;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 12px 15px;
+    text-align: left;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar ul li a {
+    color: white;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+}
+
+.sidebar ul li a:hover {
+    background-color: #1a2226;
+    padding-left: 5px;
+}
+
+/* Ikon utama */
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Menu MASTER */
+.master-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* MASTER Menu */
+.master-menu .master-link {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start; /* Menyamakan alignment dengan menu lain */
+    cursor: pointer;
+    padding: 12px 15px;
+    width: 100%;
+    gap: 10px; /* Jarak antara ikon dan teks */
+}
+
+.master-menu .master-link span:last-child {
+    margin-left: auto; /* Membuat panah dropdown tetap di kanan */
+}
+
+
+/* Sub-menu */
+.submenu {
+    list-style: none;
+    padding-left: 30px; /* Indentasi submenu */
+}
+
+.submenu li {
+    padding: 8px 15px;
+}
+
+.submenu li a {
+    color: #ddd;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px; /* Ukuran lebih kecil dari MASTER */
+}
+
+/* Ikon sub-menu (bulat-bulat) */
+.sub-icon {
+    color: #ffcc00;
+    font-size: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 12px; /* Atur ukuran ikon agar seragam */
+    height: 12px;
+}
+
+/* Tombol Sidebar */
+.toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #222d32;
+    color: white;
+    padding: 20px;
+    transition: width 0.3s;
+    overflow: hidden;
+}
+
+.sidebar.closed {
+    width: 60px; /* Lebar sidebar tertutup */
+    text-align: center;
+}
+
+.sidebar.closed ul li {
+    justify-content: center; /* Pusatkan ikon saat tertutup */
+}
+
+.sidebar.closed ul li a span {
+    display: none; /* Sembunyikan teks */
+}
+
+/* Sidebar Button */
+.toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+/* Menu MASTER */
+.master-menu {
+    display: flex;
+    flex-direction: column;
+}
+
+/* MASTER Menu */
+.master-menu .master-link {
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    padding: 12px 15px;
+    width: 100%;
+    gap: 10px;
+}
+
+.master-menu .master-link span:last-child {
+    margin-left: auto; /* Membuat panah dropdown tetap di kanan */
+}
+
+.sidebar.closed .master-menu .master-link span {
+    display: none; /* Sembunyikan teks pada sidebar tertutup */
+}
+
+/* Sub-menu */
+.submenu {
+    list-style: none;
+    padding-left: 30px; /* Indentasi submenu */
+}
+
+.submenu li {
+    padding: 8px 15px;
+}
+
+.submenu li a {
+    color: #ddd;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+}
+
+/* Ikon */
+.icon {
+    width: 18px;
+    height: 18px;
+}
+
+/* Sub-icon */
+.sub-icon {
+    color: #ffcc00;
+    font-size: 8px;
+    width: 12px;
+    height: 12px;
+}
+
+/* Main Content */
+.main-content {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: white;
+    overflow-y: auto;
+}
+
+.sidebar.closed ul li {
+    justify-content: flex-start; /* Pastikan ikon tetap rata kiri */
+    padding-left: 10px; /* Geser sedikit ke kiri */
+}
+
+.sidebar.closed ul li a {
+    justify-content: center;
+    padding: 12px 0; /* Hilangkan padding kiri-kanan agar rata */
+}
+
+.sidebar.closed .icon {
+    margin-left: 5px; /* Sesuaikan jarak ikon */
+    width: 22px; /* Sesuaikan ukuran ikon */
+    height: 22px;
+}
+
+/* Sub-menu */
+.submenu {
+    list-style: none;
+    padding-left: 30px;
+    max-height: 0; /* Awalnya disembunyikan */
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+/* Saat submenu terbuka */
+.submenu.open {
+    max-height: 200px; /* Sesuaikan dengan jumlah item */
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Icon Segitiga (Dropdown) */
+.dropdown-icon {
+    transition: transform 0.3s ease;
+}
+
+/* Saat sub-menu terbuka, ikon segitiga berputar 180 derajat */
+.dropdown-icon.rotated {
+    transform: rotate(180deg);
+}
+
+.sidebar.closed ul li.active {
+    background-color: transparent; /* Hilangkan warna putih */
+    padding: 5px;
+}
+.sidebar.closed ul li.active i,
+.sidebar.closed ul li.active .icon {
+    color: white !important;
+    fill: white !important; /* Untuk SVG */
+}
+.search-box {
+    position: relative;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 2px;
+}
+
+.search-input {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 5px;
+    font-size: 14px;
+}
+
+.search-icon {
+    color: #333;
+    margin-right: 5px;
+    padding-left: 4px;
+}
+
+/* Rekomendasi menu */
+.search-results {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    width: 100%;
+    background: rgb(34, 34, 34);
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    list-style: none;
+    padding: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+}
+
+.search-results li {
+    padding: 8px;
+    border-bottom: 1px solid #ddd;
+}
+
+.search-results li:last-child {
+    border-bottom: none;
+}
+
+.search-results li a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+}
+
+.search-results li:hover {
+    background-color: #f5f5f5;
+}
+
+
+
+@media screen and (max-width: 768px) {
+    .sidebar {
+        width: 60px; /* Sidebar mengecil */
+        overflow: hidden;
+    }
+
+    .sidebar.open {
+        width: 250px; /* Lebar sidebar ketika dibuka */
+    }
+
+    .sidebar.closed ul li a span {
+        display: none; /* Sembunyikan teks menu */
+    }
+
+    .sidebar.closed .master-menu .master-link span {
+        display: none; /* Sembunyikan teks menu MASTER */
+    }
+}
+
+
+
+
+
