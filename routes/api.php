@@ -22,10 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
 Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user'])->middleware('auth:sanctum');
-
-
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
-
 Route::get('/departemen', [\App\Http\Controllers\Api\DepartemenController::class, 'index']);
 Route::post('/departemen/add', [\App\Http\Controllers\Api\DepartemenController::class, 'add']);
 Route::delete('/departemen/{id}', [\App\Http\Controllers\Api\DepartemenController::class, 'delete']);
