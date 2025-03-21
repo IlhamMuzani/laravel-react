@@ -19,7 +19,7 @@ export default function Departemen() {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
-        fetch("https://javabakery.web.id/backend-app/api/departemen")
+        fetch("https://javabakery.web.id/api/departemen")
             .then((response) => response.json())
             .then((data) => {
                 setDepartemenList(data);
@@ -59,8 +59,8 @@ export default function Departemen() {
 
     try {
         const url = isEditing
-            ? `https://javabakery.web.id/backend-app/api/departemen/${formData.id}`
-            : "https://javabakery.web.id/backend-app/api/departemen/add";
+            ? `https://javabakery.web.id/api/departemen/${formData.id}`
+            : "https://javabakery.web.id/api/departemen/add";
 
         const method = isEditing ? "PUT" : "POST";
 
@@ -103,7 +103,7 @@ const handleDelete = async (id) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`https://javabakery.web.id/backend-app/api/departemen/${id}`, { method: "DELETE" });
+                const response = await fetch(`https://javabakery.web.id/api/departemen/${id}`, { method: "DELETE" });
                 if (!response.ok) throw new Error("Gagal menghapus departemen");
 
                 setDepartemenList((prev) => {
