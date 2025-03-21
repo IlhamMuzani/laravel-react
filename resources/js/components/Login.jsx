@@ -20,7 +20,7 @@ export default function Login({ onLogin }) {
         setError(null);
 
         try {
-            const response = await axios.post("https://javabakery.web.id/api/login", {
+            const response = await axios.post("https://javabakery.web.id/backend-app/api/login", {
                 kode_user: kodeUser,
                 password: password
             });

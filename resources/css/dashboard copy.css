@@ -1,4 +1,4 @@
-* {
+ * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -68,12 +68,14 @@
 .toggle-btn {
     background: none;
     border: none;
-    color: black;
+    color: white;
     font-size: 20px;
     cursor: pointer;
     text-align: left;
     margin-bottom: 20px;
 }
+
+
 
 /* Main Content */
 .main-content {
@@ -103,6 +105,7 @@
     margin: 0; /* Hilangkan margin */
 }
 
+
 .sidebar.closed ul li {
     justify-content: center; /* Pusatkan ikon saat tertutup */
 }
@@ -122,29 +125,24 @@
     fill: white !important; /* Untuk SVG */
 }
 
+
 .master-menu {
     position: relative;
 }
 
 .master-menu .submenu {
-    display: block;
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #2e3b4e;
+    width: 100%;
+    border-radius: 5px;
     overflow: hidden;
-    max-height: 0;
-    transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-    opacity: 0;
 }
 
 .master-menu.open .submenu {
-    max-height: 300px; /* Atur sesuai kebutuhan jumlah item */
-    opacity: 1;
-}
-
-.icon-chevron {
-    transition: transform 0.3s ease-in-out;
-}
-
-.icon-chevron.rotate {
-    transform: rotate(180deg);
+    display: block;
 }
 
 .submenu li {
@@ -165,22 +163,17 @@
     display: none; /* Sembunyikan submenu jika sidebar tertutup */
 }
 
-.small-yellow-icon {
-    color: rgb(255, 238, 0); /* Warna kuning */
-    background-color: rgb(255, 217, 0); /* Lingkaran kuning */
-    border-radius: 50%; /* Membuat lingkaran */
-    width: 12px; /* Ukuran lingkaran */
-    height: 12px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 6px; /* Ukuran ikon lebih kecil */
-}
 
-/* logo  */
-.company-logo {
-    width: 150px; /* Sesuaikan ukuran */
-    height: auto;
+.small-yellow-icon {
+  color: rgb(255, 238, 0); /* Warna kuning */
+  background-color: rgb(255, 217, 0); /* Lingkaran kuning */
+  border-radius: 50%; /* Membuat lingkaran */
+  width: 12px; /* Ukuran lingkaran */
+  height: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 6px; /* Ukuran ikon lebih kecil */
 }
 
 

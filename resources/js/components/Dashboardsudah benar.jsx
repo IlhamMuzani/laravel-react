@@ -45,31 +45,10 @@ export default function Dashboard({ onLogout, logoSrc }) {
     return (
         <div className="dashboard">
             <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
-                <div style={{ display: "flex", alignItems: "flex-start" }}> {/* Ganti alignItems ke flex-start */}
-                    <img
-                        src={`${import.meta.env.VITE_API_URL}/storage/uploads/user/user.png`}
-                        alt="Profile"
-                        className="toggle-btn"
-                        onClick={toggleSidebar}
-                        style={{
-                            borderRadius: "50%",
-                            width: "40px",
-                            height: "40px",
-                            cursor: "pointer",
-                            marginTop: "0px", /* Menurunkan foto sedikit */
-                        }}
-                    />
-                    <span
-                        style={{
-                            marginLeft: "10px",
-                            fontSize: "18px",
-                            fontWeight: "bold",
-                            marginTop: "5px", /* Mengangkat nama sedikit */
-                        }}
-                    >
-                        John Doe
-                    </span>
-                </div>
+                <button className="toggle-btn" onClick={toggleSidebar}>
+                    <FontAwesomeIcon icon={faBars} />
+                </button>
+
                 <ul>
                     {mainMenus.map((menu, index) => (
                         <li key={index} className={location.pathname === menu.path ? "active" : ""}>
@@ -130,17 +109,13 @@ export default function Dashboard({ onLogout, logoSrc }) {
 
             <main className="main-content">
                 <header className="header">
-                    {/* Tombol titik tiga */}
-                    <button className="toggle-btn" onClick={toggleSidebar}>
-                        <FontAwesomeIcon icon={faBars} />
-                    </button>
-
                     {/* Menampilkan logo dari Laravel storage */}
                     <img
                         src={`${import.meta.env.VITE_API_URL}/storage/uploads/user/logo1.png`}
                         alt="Logo PT. JAVA LINE LOGISTICS"
                         className="company-logo"
                     />
+
                 </header>
                 <Outlet />
             </main>

@@ -19,7 +19,7 @@ export default function Karyawan() {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
-        fetch("https://javabakery.web.id/api/karyawan")
+        fetch("https://javabakery.web.id/backend-app/api/karyawan")
             .then((response) => response.json())
             .then((data) => {
                 setKaryawanList(data);
@@ -59,8 +59,8 @@ export default function Karyawan() {
 
     try {
         const url = isEditing
-            ? `https://javabakery.web.id/api/karyawan/${formData.id}`
-            : "https://javabakery.web.id/api/karyawan/add";
+            ? `https://javabakery.web.id/backend-app/api/karyawan/${formData.id}`
+            : "https://javabakery.web.id/backend-app/api/karyawan/add";
 
         const method = isEditing ? "PUT" : "POST";
 
@@ -103,7 +103,7 @@ const handleDelete = async (id) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`https://javabakery.web.id/api/karyawan/${id}`, { method: "DELETE" });
+                const response = await fetch(`https://javabakery.web.id/backend-app/api/karyawan/${id}`, { method: "DELETE" });
                 if (!response.ok) throw new Error("Gagal menghapus karyawan");
 
                 setKaryawanList((prev) => {
