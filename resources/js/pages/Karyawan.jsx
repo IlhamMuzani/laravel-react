@@ -19,7 +19,7 @@ export default function Karyawan() {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
-        fetch("${import.meta.env.VITE_API_URL}/api/karyawan")
+        fetch(`${import.meta.env.VITE_API_URL}/api/karyawan`)
             .then((response) => response.json())
             .then((data) => {
                 setKaryawanList(data);
@@ -60,7 +60,7 @@ export default function Karyawan() {
     try {
         const url = isEditing
             ? `${import.meta.env.VITE_API_URL}/api/karyawan/${formData.id}`
-            : "${import.meta.env.VITE_API_URL}/api/karyawan/add";
+            : `${import.meta.env.VITE_API_URL}/api/karyawan/add`;
 
         const method = isEditing ? "PUT" : "POST";
 

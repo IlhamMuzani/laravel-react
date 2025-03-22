@@ -19,7 +19,7 @@ export default function Departemen() {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
-        fetch("${import.meta.env.VITE_API_URL}/api/departemen")
+        fetch(`${import.meta.env.VITE_API_URL}/api/departemen`)
             .then((response) => response.json())
             .then((data) => {
                 setDepartemenList(data);
@@ -60,7 +60,7 @@ export default function Departemen() {
     try {
         const url = isEditing
             ? `${import.meta.env.VITE_API_URL}/api/departemen/${formData.id}`
-            : "${import.meta.env.VITE_API_URL}/api/departemen/add";
+            : `${import.meta.env.VITE_API_URL}/api/departemen/add`;
 
         const method = isEditing ? "PUT" : "POST";
 
