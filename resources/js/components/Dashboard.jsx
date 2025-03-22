@@ -47,7 +47,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
             <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
                 <div style={{ display: "flex", alignItems: "flex-start" }}> {/* Ganti alignItems ke flex-start */}
                     <img
-                        src={`${import.meta.env.VITE_API_URL}/storage/uploads/user/user.png`}
+                        src="https://javabakery.web.id/public/storage/uploads/user/user.png"
                         alt="Profile"
                         className="toggle-btn"
                         onClick={toggleSidebar}
@@ -137,7 +137,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
 
                     {/* Menampilkan logo dari Laravel storage */}
                     <img
-                        src={`${import.meta.env.VITE_API_URL}/storage/uploads/user/logo1.png`}
+                        src="https://javabakery.web.id/public/storage/uploads/user/user.png"
                         alt="Logo PT. JAVA LINE LOGISTICS"
                         className="company-logo"
                     />
