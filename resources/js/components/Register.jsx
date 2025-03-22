@@ -12,7 +12,7 @@ export default function Register() {
         setMessage(null);
 
         try {
-            const response = await axios.post("https://javabakery.web.id/api/register", {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/register`, {
                 kode_user: kodeUser,
                 name: name,
                 password: password

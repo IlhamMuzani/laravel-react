@@ -59,8 +59,8 @@ export default function Karyawan() {
 
     try {
         const url = isEditing
-            ? `https://javabakery.web.id/api/karyawan/${formData.id}`
-            : "https://javabakery.web.id/api/karyawan/add";
+            ? `${import.meta.env.VITE_API_URL}/api/karyawan/${formData.id}`
+            : "${import.meta.env.VITE_API_URL}/api/karyawan/add";
 
         const method = isEditing ? "PUT" : "POST";
 
@@ -103,7 +103,7 @@ const handleDelete = async (id) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`https://javabakery.web.id/api/karyawan/${id}`, { method: "DELETE" });
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/karyawan/${id}`, { method: "DELETE" });
                 if (!response.ok) throw new Error("Gagal menghapus karyawan");
 
                 setKaryawanList((prev) => {

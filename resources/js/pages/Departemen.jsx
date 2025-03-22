@@ -51,7 +51,7 @@ export default function Departemen() {
 
 
     // Handle submit (Create / Update)
-   const handleSubmit = async () => {
+    const handleSubmit = async () => {
     if (!formData.nama) {
         alert("Nama Departemen tidak boleh kosong!");
         return;
@@ -59,8 +59,8 @@ export default function Departemen() {
 
     try {
         const url = isEditing
-            ? `https://javabakery.web.id/api/departemen/${formData.id}`
-            : "https://javabakery.web.id/api/departemen/add";
+            ? `${import.meta.env.VITE_API_URL}/api/departemen/${formData.id}`
+            : "${import.meta.env.VITE_API_URL}/api/departemen/add";
 
         const method = isEditing ? "PUT" : "POST";
 
@@ -103,7 +103,7 @@ const handleDelete = async (id) => {
     }).then(async (result) => {
         if (result.isConfirmed) {
             try {
-                const response = await fetch(`https://javabakery.web.id/api/departemen/${id}`, { method: "DELETE" });
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/api/departemen/${id}`, { method: "DELETE" });
                 if (!response.ok) throw new Error("Gagal menghapus departemen");
 
                 setDepartemenList((prev) => {
