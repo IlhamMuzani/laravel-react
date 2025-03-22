@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from "react-router-dom";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Dashboard from "./components/Dashboard";
+import Login from "./components/Login.jsx";
+import Register from "./components/Register.jsx";
+import Dashboard from "./components/Dashboard.jsx";
 import Departemen from "./pages/Departemen.jsx";
-import Karyawan from "./pages/Karyawan.jsx"; // ✅ Tambahkan import Karyawan
+import Karyawan from "./pages/Karyawan.jsx";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -15,17 +15,19 @@ function App() {
     const navigate = useNavigate();
 
     useEffect(() => {
-        localStorage.setItem("lastPath", location.pathname); // ✅ Simpan path terakhir
+        document.title = "JavaLine";
+        localStorage.setItem("lastPath", location.pathname);
     }, [location]);
+
 
     useEffect(() => {
         const token = localStorage.getItem("token");
         const userData = localStorage.getItem("user");
-        const lastPath = localStorage.getItem("lastPath") || "/dashboard"; // ✅ Ambil path terakhir sebelum refresh
+        const lastPath = localStorage.getItem("lastPath") || "/dashboard";
 
         if (token && userData) {
             setUser(JSON.parse(userData));
-            navigate(lastPath); // ✅ Kembali ke halaman terakhir setelah login
+            navigate(lastPath);
         }
     }, []);
 
@@ -33,13 +35,13 @@ function App() {
         localStorage.setItem("token", "your_token_here");
         localStorage.setItem("user", JSON.stringify(userData));
         setUser(userData);
-        navigate(localStorage.getItem("lastPath") || "/dashboard"); // ✅ Kembali ke halaman terakhir setelah login
+        navigate(localStorage.getItem("lastPath") || "/dashboard");
     };
 
     const handleLogout = () => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
-        localStorage.removeItem("lastPath"); // ✅ Hapus path terakhir saat logout
+        localStorage.removeItem("lastPath");
         setUser(null);
         navigate("/");
     };
@@ -49,18 +51,21 @@ function App() {
             <Route path="/" element={user ? <Navigate to="/dashboard" /> : <Login onLogin={handleLogin} />} />
             <Route path="/register" element={<Register />} />
             <Route path="/dashboard" element={user ? <Dashboard onLogout={handleLogout} user={user} /> : <Navigate to="/" />}>
-                <Route index element={<h2>Selamat Datang di Dashboard</h2>} />
+            <Route index element={<h2>Selamat Datang di Dashboard, {user?.karyawan?.nama_lengkap || 'User'}</h2>
+} />
                 <Route path="departemen" element={<Departemen />} />
-                <Route path="karyawan" element={<Karyawan />} /> {/* ✅ Tambahkan route Karyawan */}
+                <Route path="karyawan" element={<Karyawan />} />
             </Route>
         </Routes>
     );
 }
 
-const root = document.getElementById("app");
+const basename = import.meta.env.VITE_BASENAME || "/";
+
+const root = document.getElementById("App");
 if (root) {
     ReactDOM.createRoot(root).render(
-        <Router basename="/">
+        <Router basename={basename}>
             <App />
         </Router>
     );

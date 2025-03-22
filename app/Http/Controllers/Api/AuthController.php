@@ -13,6 +13,18 @@ use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
+
+    public function getUser($kode_user)
+    {
+        $user = User::with('karyawan')->where('kode_user', $kode_user)->first();
+
+        if (!$user) {
+            return response()->json(['message' => 'User tidak ditemukan'], 404);
+        }
+
+        return response()->json(['user' => $user]);
+    }
+
     public function login(Request $request)
     {
         $credentials = $request->validate([
@@ -20,7 +32,7 @@ class AuthController extends Controller
             'password' => 'required',
         ]);
 
-        $user = User::where('kode_user', $credentials['kode_user'])->first();
+        $user = User::with('karyawan')->where('kode_user', $credentials['kode_user'])->first();
 
         if (!$user || !Hash::check($credentials['password'], $user->password)) {
             return response()->json(['message' => 'Kode User atau Password salah!'], 401);

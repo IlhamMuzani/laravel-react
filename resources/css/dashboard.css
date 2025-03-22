@@ -183,6 +183,11 @@
     height: auto;
 }
 
+.search-input {
+    width: 30%; /* Lebar 30% saat layar besar */
+    min-width: 200px; /* Minimal 200px agar tidak terlalu kecil */
+    max-width: 400px; /* Batas maksimal */
+}
 
 @media screen and (max-width: 768px) {
     .sidebar {
@@ -196,5 +201,77 @@
 
     .sidebar.closed ul li a span {
         display: none; /* Sembunyikan teks menu */
+    }
+
+    /* Perkecil font saat layar kecil */
+    .sidebar,
+    .sidebar ul li a,
+    .main-content {
+        font-size: 12px; /* Atur ukuran font lebih kecil */
+    }
+
+    .sidebar ul li {
+        padding: 8px 10px; /* Sesuaikan padding */
+    }
+
+    .icon {
+        width: 14px; /* Perkecil ukuran ikon */
+        height: 14px;
+    }
+
+    .small-yellow-icon {
+        width: 10px; /* Perkecil ukuran lingkaran */
+        height: 10px;
+        font-size: 5px;
+    }
+
+    .company-logo {
+        width: 100px; /* Perkecil logo */
+    }
+
+    .search-input {
+        width: 70%; /* Lebar 70% untuk tablet */
+    }
+}
+
+/* Untuk layar yang lebih kecil dari 480px */
+@media screen and (max-width: 480px) {
+    .sidebar,
+    .sidebar ul li a,
+    .main-content {
+        font-size: 10px; /* Ukuran font lebih kecil lagi */
+    }
+
+    .sidebar ul li {
+        padding: 6px 8px; /* Padding lebih kecil */
+    }
+
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+
+    .small-yellow-icon {
+        width: 8px;
+        height: 8px;
+        font-size: 4px;
+    }
+
+    .company-logo {
+        width: 80px; /* Sesuaikan ukuran logo */
+    }
+
+    .title-judul {
+        font-size: 16px; /* Lebih kecil untuk layar sangat kecil */
+    }
+
+    .btn-tambah {
+        font-size: 10px !important;
+        padding: 8px 12px !important;
+    }
+
+    .search-input {
+        width: 100%; /* Lebar penuh pada HP */
+        font-size: 10px !important;
     }
 }

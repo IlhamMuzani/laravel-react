@@ -73,4 +73,9 @@ class User extends Authenticatable
             set: fn($value) => json_encode($value),
         );
     }
+
+    public function karyawan()
+    {
+        return $this->belongsTo(Karyawan::class, 'karyawan_id', 'id');
+    }
 }

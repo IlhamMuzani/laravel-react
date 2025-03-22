@@ -14,6 +14,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
     const [searchQuery, setSearchQuery] = useState("");
     const [filteredMenus, setFilteredMenus] = useState([]);
     const location = useLocation();
+    const [user, setUser] = useState(null);
 
     const mainMenus = [
         { name: "Dashboard", path: "/dashboard", icon: faTachometerAlt }
@@ -42,6 +43,21 @@ export default function Dashboard({ onLogout, logoSrc }) {
     const toggleMasterMenu = () => setIsMasterOpen((prev) => !prev);
     const toggleOperasionalMenu = () => setIsOperasionalOpen((prev) => !prev);
 
+    useEffect(() => {
+        document.title = "JavaLine";
+        localStorage.setItem("lastPath", location.pathname);
+    }, [location]);
+
+    useEffect(() => {
+        const token = localStorage.getItem("token");
+        const userData = localStorage.getItem("user");
+        const lastPath = localStorage.getItem("lastPath") || "/dashboard";
+
+        if (token && userData) {
+            setUser(JSON.parse(userData));
+        }
+    }, []);
+
     return (
         <div className="dashboard">
             <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
@@ -59,15 +75,15 @@ export default function Dashboard({ onLogout, logoSrc }) {
                             marginTop: "0px", /* Menurunkan foto sedikit */
                         }}
                     />
-                    <span
+                    <span className="title-name-profile"
                         style={{
                             marginLeft: "10px",
-                            fontSize: "18px",
+                            fontSize: "15px",
                             fontWeight: "bold",
-                            marginTop: "5px", /* Mengangkat nama sedikit */
+                            marginTop: "7px", /* Mengangkat nama sedikit */
                         }}
                     >
-                        John Doe
+                        {user?.karyawan?.nama_lengkap || 'User'}
                     </span>
                 </div>
                 <ul>

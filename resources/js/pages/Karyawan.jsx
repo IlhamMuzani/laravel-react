@@ -51,7 +51,7 @@ export default function Karyawan() {
 
 
     // Handle submit (Create / Update)
-   const handleSubmit = async () => {
+const handleSubmit = async () => {
     if (!formData.nama_lengkap) {
         alert("Nama Karyawan tidak boleh kosong!");
         return;
