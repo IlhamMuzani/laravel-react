@@ -19,7 +19,7 @@ export default function Departemen() {
     const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
     useEffect(() => {
-        fetch("https://javabakery.web.id/api/departemen")
+        fetch("${import.meta.env.VITE_API_URL}/api/departemen")
             .then((response) => response.json())
             .then((data) => {
                 setDepartemenList(data);
