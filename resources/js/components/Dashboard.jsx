@@ -34,7 +34,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
     // Function to filter menus based on search query
     const filterMenus = (menus) => {
         return searchQuery.trim() === ""
-            ? []
+            ? menus // Return all menus if search query is empty
             : menus.filter(menu => menu.name.toLowerCase().includes(searchQuery.toLowerCase()));
     };
 
@@ -86,7 +86,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
                                 transition: "opacity 0.3s ease",
                             }}
                         >
-                            {user?.karyawan?.nama_lengkap || 'User '}
+                            {user?.karyawan?.nama_lengkap || 'User  '}
                         </span>
                     )}
                 </div>
@@ -132,28 +132,22 @@ export default function Dashboard({ onLogout, logoSrc }) {
                 {/* Recommended Menus */}
                 {searchQuery && (
                     <div className="recommended-menus">
-                        {/* <h4 style={{ color: "#fff", margin: "10px 0" }}>Recommended:</h4> */}
                         <ul>
-                            {[...mainMenus, ...masterMenus, ...operasionalMenus].map((menu, index) => {
-                                if (menu.name.toLowerCase().includes(searchQuery.toLowerCase())) {
-                                    return (
-                                        <li key={index} className={location.pathname === menu.path ? "active" : ""}>
-                                            <Link to={menu.path}>
-                                                <FontAwesomeIcon icon={menu.icon} className="icon" />
-                                                {isSidebarOpen && <span>{menu.name}</span>}
-                                            </Link>
-                                        </li>
-                                    );
-                                }
-                                return null;
-                            })}
+                            {filterMenus([...mainMenus, ...masterMenus, ...operasionalMenus]).map((menu, index) => (
+                                <li key={index} className={location.pathname === menu.path ? "active" : ""}>
+                                    <Link to={menu.path}>
+                                        <FontAwesomeIcon icon={menu.icon} className="icon" />
+                                        {isSidebarOpen && <span>{menu.name}</span>}
+                                    </Link>
+                                </li>
+                            ))}
                         </ul>
                     </div>
                 )}
 
                 <ul>
                     {/* Main Menu */}
-                    {mainMenus.map((menu, index) => (
+                    {filterMenus(mainMenus).map((menu, index) => (
                         <li key={index} className={location.pathname === menu.path ? "active" : ""}>
                             <Link to={menu.path}>
                                 <FontAwesomeIcon icon={menu.icon} className="icon" />
