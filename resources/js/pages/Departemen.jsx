@@ -167,20 +167,20 @@ export default function Departemen() {
             <div className="d-flex justify-content-between align-items-center header-judul">
                 <h2 className="title-judul">Daftar Departemen</h2>
                 <button className="btn btn-primary btn-tambah" onClick={() => openModal()}>
-                    <FaPlus /> Tambah Data
+                    <FaPlus /> Tambah
                 </button>
             </div>
 
             <hr />
 
             {/* Input Pencarian */}
-          <input
-  type="text"
-  className="form-control search-input mb-3"
-  placeholder="Cari departemen..."
-  value={searchTerm}
-  onChange={(e) => setSearchTerm(e.target.value)}
-/>
+            <input
+                type="text"
+                className="form-control search-input mb-3"
+                placeholder="Cari departemen..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+            />
 
 
 
@@ -241,58 +241,59 @@ export default function Departemen() {
 
             )}
 
-            {/* Pagination */}
-            {totalPages > 1 && (
-                <div className="d-flex justify-content-center align-items-center mt-3">
-                    {/* Tombol Sebelumnya */}
-                    <button
-                        className="btn btn-outline-primary me-2"
-                        onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                        disabled={currentPage === 1}
-                    >
-                        <FaChevronLeft />
-                    </button>
+           {/* Pagination */}
+{totalPages > 1 && (
+  <div className="d-flex justify-content-center align-items-center mt-3 pagination-container">
+    {/* Tombol Sebelumnya */}
+    <button
+      className="btn btn-outline-primary me-2"
+      onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+      disabled={currentPage === 1}
+    >
+      <FaChevronLeft />
+    </button>
 
-                    {/* Tombol Halaman */}
-                    {currentPage > 3 && (
-                        <>
-                            <button className="btn btn-outline-primary me-1" onClick={() => setCurrentPage(1)}>1</button>
-                            {currentPage > 4 && <span className="me-1">...</span>}
-                        </>
-                    )}
+    {/* Tombol Halaman */}
+    {currentPage > 3 && (
+      <>
+        <button className="btn btn-outline-primary me-1" onClick={() => setCurrentPage(1)}>1</button>
+        {currentPage > 4 && <span className="me-1">...</span>}
+      </>
+    )}
 
-                    {[...Array(totalPages)]
-                        .map((_, index) => index + 1)
-                        .filter((page) => page === 1 || page === totalPages || (page >= currentPage - 2 && page <= currentPage + 2))
-                        .map((page) => (
-                            <button
-                                key={page}
-                                className={`btn me-1 ${currentPage === page ? "btn-primary" : "btn-outline-primary"}`}
-                                onClick={() => setCurrentPage(page)}
-                            >
-                                {page}
-                            </button>
-                        ))}
+    {[...Array(totalPages)]
+      .map((_, index) => index + 1)
+      .filter((page) => page === 1 || page === totalPages || (page >= currentPage - 2 && page <= currentPage + 2))
+      .map((page) => (
+        <button
+          key={page}
+          className={`btn me-1 ${currentPage === page ? "btn-primary" : "btn-outline-primary"}`}
+          onClick={() => setCurrentPage(page)}
+        >
+          {page}
+        </button>
+      ))}
 
-                    {currentPage < totalPages - 2 && (
-                        <>
-                            {currentPage < totalPages - 3 && <span className="me-1">...</span>}
-                            <button className="btn btn-outline-primary me-1" onClick={() => setCurrentPage(totalPages)}>
-                                {totalPages}
-                            </button>
-                        </>
-                    )}
+    {currentPage < totalPages - 2 && (
+      <>
+        {currentPage < totalPages - 3 && <span className="me-1">...</span>}
+        <button className="btn btn-outline-primary me-1" onClick={() => setCurrentPage(totalPages)}>
+          {totalPages}
+        </button>
+      </>
+    )}
 
-                    {/* Tombol Berikutnya */}
-                    <button
-                        className="btn btn-outline-primary ms-2"
-                        onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                        disabled={currentPage === totalPages}
-                    >
-                        <FaChevronRight />
-                    </button>
-                </div>
-            )}
+    {/* Tombol Berikutnya */}
+    <button
+      className="btn btn-outline-primary ms-2"
+      onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+      disabled={currentPage === totalPages}
+    >
+      <FaChevronRight />
+    </button>
+  </div>
+)}
+
 
 
             {/* MODAL FORM */}

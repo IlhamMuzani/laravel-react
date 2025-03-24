@@ -12,9 +12,8 @@ export default function Dashboard({ onLogout, logoSrc }) {
     const [isMasterOpen, setIsMasterOpen] = useState(false);
     const [isOperasionalOpen, setIsOperasionalOpen] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [filteredMenus, setFilteredMenus] = useState([]);
     const location = useLocation();
-    const [user, setUser] = useState(null);
+    const [user, setUser ] = useState(null);
 
     const mainMenus = [
         { name: "Dashboard", path: "/dashboard", icon: faTachometerAlt }
@@ -32,12 +31,12 @@ export default function Dashboard({ onLogout, logoSrc }) {
         { name: "KIR", path: "/dashboard/kir", icon: faCircle },
     ];
 
-    useEffect(() => {
-        setFilteredMenus(
-            searchQuery.trim() === "" ? [] :
-                [...mainMenus, ...masterMenus, ...operasionalMenus].filter(menu => menu.name.toLowerCase().includes(searchQuery.toLowerCase()))
-        );
-    }, [searchQuery]);
+    // Function to filter menus based on search query
+    const filterMenus = (menus) => {
+        return searchQuery.trim() === ""
+            ? []
+            : menus.filter(menu => menu.name.toLowerCase().includes(searchQuery.toLowerCase()));
+    };
 
     const toggleSidebar = () => setIsSidebarOpen(!isSidebarOpen);
     const toggleMasterMenu = () => setIsMasterOpen((prev) => !prev);
@@ -51,17 +50,16 @@ export default function Dashboard({ onLogout, logoSrc }) {
     useEffect(() => {
         const token = localStorage.getItem("token");
         const userData = localStorage.getItem("user");
-        const lastPath = localStorage.getItem("lastPath") || "/dashboard";
 
         if (token && userData) {
-            setUser(JSON.parse(userData));
+            setUser (JSON.parse(userData));
         }
     }, []);
 
     return (
         <div className="dashboard">
             <aside className={`sidebar ${isSidebarOpen ? "open" : "closed"}`}>
-                <div style={{ display: "flex", alignItems: "flex-start" }}> {/* Ganti alignItems ke flex-start */}
+                <div style={{ display: "flex", alignItems: "flex-start" }}>
                     <img
                         src={`${import.meta.env.VITE_API_URL}/public/storage/uploads/user/user.png`}
                         alt="Profile"
@@ -69,24 +67,92 @@ export default function Dashboard({ onLogout, logoSrc }) {
                         onClick={toggleSidebar}
                         style={{
                             borderRadius: "50%",
-                            width: "40px",
-                            height: "40px",
+                            width: isSidebarOpen ? "40px" : "30px",
+                            height: isSidebarOpen ? "40px" : "30px",
                             cursor: "pointer",
-                            marginTop: "0px", /* Menurunkan foto sedikit */
+                            marginTop: "0px",
+                            marginLeft: isSidebarOpen ? "0px" : "-5px",
+                            transition: "all 0.3s ease",
                         }}
                     />
-                    <span className="title-name-profile"
-                        style={{
-                            marginLeft: "10px",
-                            fontSize: "15px",
-                            fontWeight: "bold",
-                            marginTop: "7px", /* Mengangkat nama sedikit */
-                        }}
-                    >
-                        {user?.karyawan?.nama_lengkap || 'User'}
-                    </span>
+                    {isSidebarOpen && (
+                        <span
+                            className="title-name-profile"
+                            style={{
+                                marginLeft: "11px",
+                                fontSize: "15px",
+                                fontWeight: "bold",
+                                marginTop: "7px",
+                                transition: "opacity 0.3s ease",
+                            }}
+                        >
+                            {user?.karyawan?.nama_lengkap || 'User '}
+                        </span>
+                    )}
                 </div>
+
+                {isSidebarOpen && (
+                    <div style={{ position: "relative", width: "100%" }}>
+                        <input
+                            type="text"
+                            className="form-control search-inputs mb-3"
+                            placeholder="Cari menu..."
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            style={{
+                                width: "100%",
+                                backgroundColor: "#3e4351",
+                                color: "#fff",
+                                border: "1px solid #d7d7d7",
+                                padding: "6px 36px 6px 8px",
+                                borderRadius: "8px",
+                                height: "32px",
+                                fontSize: "14px",
+                            }}
+                        />
+                        {searchQuery && (
+                            <span
+                                onClick={() => setSearchQuery("")}
+                                style={{
+                                    position: "absolute",
+                                    top: "50%",
+                                    right: "10px",
+                                    transform: "translateY(-50%)",
+                                    cursor: "pointer",
+                                    color: "#ccc",
+                                    fontSize: "16px",
+                                }}
+                            >
+                                &times;
+                            </span>
+                        )}
+                    </div>
+                )}
+
+                {/* Recommended Menus */}
+                {searchQuery && (
+                    <div className="recommended-menus">
+                        {/* <h4 style={{ color: "#fff", margin: "10px 0" }}>Recommended:</h4> */}
+                        <ul>
+                            {[...mainMenus, ...masterMenus, ...operasionalMenus].map((menu, index) => {
+                                if (menu.name.toLowerCase().includes(searchQuery.toLowerCase())) {
+                                    return (
+                                        <li key={index} className={location.pathname === menu.path ? "active" : ""}>
+                                            <Link to={menu.path}>
+                                                <FontAwesomeIcon icon={menu.icon} className="icon" />
+                                                {isSidebarOpen && <span>{menu.name}</span>}
+                                            </Link>
+                                        </li>
+                                    );
+                                }
+                                return null;
+                            })}
+                        </ul>
+                    </div>
+                )}
+
                 <ul>
+                    {/* Main Menu */}
                     {mainMenus.map((menu, index) => (
                         <li key={index} className={location.pathname === menu.path ? "active" : ""}>
                             <Link to={menu.path}>
@@ -106,7 +172,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
                             )}
                         </a>
                     </li>
-                    {isMasterOpen && masterMenus.map((menu, index) => (
+                    {isMasterOpen && filterMenus(masterMenus).map((menu, index) => (
                         <li key={index} className={location.pathname === menu.path ? "active" : ""}>
                             <Link to={menu.path}>
                                 <FontAwesomeIcon icon={menu.icon} className="icon small-yellow-icon" />
@@ -116,7 +182,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
                     ))}
 
                     {/* Operasional Menu */}
-                    <li className={`master-menu ${isOperasionalOpen ? "open" : ""}`}>
+                    <li className={`operasional-menu ${isOperasionalOpen ? "open" : ""}`}>
                         <a href="#" onClick={toggleOperasionalMenu}>
                             <FontAwesomeIcon icon={faTruck} className="icon" />
                             {isSidebarOpen && <span>Operasional</span>}
@@ -125,7 +191,7 @@ export default function Dashboard({ onLogout, logoSrc }) {
                             )}
                         </a>
                     </li>
-                    {isOperasionalOpen && operasionalMenus.map((menu, index) => (
+                    {isOperasionalOpen && filterMenus(operasionalMenus).map((menu, index) => (
                         <li key={index} className={location.pathname === menu.path ? "active" : ""}>
                             <Link to={menu.path}>
                                 <FontAwesomeIcon icon={menu.icon} className="icon small-yellow-icon" />
@@ -146,12 +212,9 @@ export default function Dashboard({ onLogout, logoSrc }) {
 
             <main className="main-content">
                 <header className="header">
-                    {/* Tombol titik tiga */}
                     <button className="toggle-btn" onClick={toggleSidebar}>
                         <FontAwesomeIcon icon={faBars} />
                     </button>
-
-                    {/* Menampilkan logo dari Laravel storage */}
                     <img
                         src={`${import.meta.env.VITE_API_URL}/public/storage/uploads/user/logo1.png`}
                         alt="Logo PT. JAVA LINE LOGISTICS"
@@ -160,7 +223,6 @@ export default function Dashboard({ onLogout, logoSrc }) {
                 </header>
                 <Outlet />
             </main>
-
         </div>
     );
 }
