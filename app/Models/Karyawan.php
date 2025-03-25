@@ -70,8 +70,9 @@ class Karyawan extends Model
 
     public function departemen()
     {
-        return $this->belongsTo(Departemen::class);
+        return $this->belongsTo(Departemen::class, 'departemen_id');
     }
+
 
     public function user()
     {

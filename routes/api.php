@@ -24,6 +24,7 @@ Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']
 Route::post('/logout', [\App\Http\Controllers\Api\AuthController::class, 'logout'])->middleware('auth:sanctum');
 Route::get('/user', [\App\Http\Controllers\Api\AuthController::class, 'user'])->middleware('auth:sanctum');
 Route::post('/register', [\App\Http\Controllers\Api\AuthController::class, 'register']);
+
 Route::get('/departemen', [\App\Http\Controllers\Api\DepartemenController::class, 'index']);
 Route::post('/departemen/add', [\App\Http\Controllers\Api\DepartemenController::class, 'add']);
 Route::delete('/departemen/{id}', [\App\Http\Controllers\Api\DepartemenController::class, 'delete']);
@@ -34,4 +35,5 @@ Route::get('/karyawan', [\App\Http\Controllers\Api\KaryawanController::class, 'i
 Route::post('/karyawan/add', [\App\Http\Controllers\Api\KaryawanController::class, 'add']);
 Route::delete('/karyawan/{id}', [\App\Http\Controllers\Api\KaryawanController::class, 'delete']);
 Route::get('/karyawan/{id}/edit', [\App\Http\Controllers\Api\KaryawanController::class, 'edit']);
-Route::put('/karyawan/{id}', [\App\Http\Controllers\Api\KaryawanController::class, 'update']);
+Route::post('/karyawan/{id}', [\App\Http\Controllers\Api\KaryawanController::class, 'update']);
+Route::put('/karyawan/{id}', [\App\Http\Controllers\Api\KaryawanController::class, 'show']);

@@ -4,8 +4,8 @@ import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavig
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import Dashboard from "./components/Dashboard.jsx";
-import Departemen from "./pages/Departemen.jsx";
-import Karyawan from "./pages/Karyawan.jsx";
+import Departemen from "./pages/departemen/DaftarDepartemen.jsx";
+import Karyawan from "./pages/karyawan/DaftarKaryawan.jsx";
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -46,14 +46,14 @@ function App() {
         };
     }, [user]);
 
-    useEffect(() => {
+useEffect(() => {
     const token = localStorage.getItem("token");
     const userData = localStorage.getItem("user");
-    const expiresAt = localStorage.getItem("expiresAt");
+    const expiresAt = parseInt(localStorage.getItem("expiresAt"), 10);
 
     if (token && userData && expiresAt) {
-        if (Date.now() > parseInt(expiresAt)) {
-            handleLogout();
+        if (Date.now() >= expiresAt) {
+            handleLogout(); // Pastikan logout jika sesi sudah habis
         } else {
             setUser(JSON.parse(userData));
             navigate(localStorage.getItem("lastPath") || "/dashboard");
@@ -62,10 +62,11 @@ function App() {
 }, []);
 
 
+
     // console.log("User state:", user);
 
 
-   const handleLogin = (userData) => {
+const handleLogin = (userData) => {
     const expirationTime = Date.now() + 2 * 60 * 60 * 1000; // 2 jam ke depan
     localStorage.setItem("token", "your_token_here");
     localStorage.setItem("user", JSON.stringify(userData));
@@ -76,7 +77,7 @@ function App() {
 
 
     const handleLogout = () => {
-        alert("Session expired. Please login again.");
+        // alert("Session expired. Please login again.");
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         localStorage.removeItem("lastPath");
